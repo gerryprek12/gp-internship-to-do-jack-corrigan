@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load abc %}
+{% block content %}
+    <div class="container">
+        <h1>My Lists</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Priority</th>
+                                <th>Due Date</th>
+                                <th>Created By</th>
+                                <th>Assigned To</th>
+                                <th># of Complete Tasks</th>
+                                <th># of Incomplete Tasks</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for List in Lists %}
+                                <tr>
+                                    <td><a href="{% url 'lists' %}">{{ List.name }}</a></td>
+                                    <td>{{ abc|element:List.priority }}</td>
+                                    <td>{{ List.due_date }}</td>
+                                    <td>{{ List.created_by }}</td>
+                                    <td>{{ List.assigned_to }}</td>
+                                    <td>Placeholder</td>
+                                    <td>Placeholder</td>
+                                    <td>Placeholder</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

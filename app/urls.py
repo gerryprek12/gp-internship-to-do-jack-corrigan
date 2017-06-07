@@ -27,5 +27,5 @@ urlpatterns = [
     url(r'^logout/$', views.logout_user, name='logout'),
     url(r'^signup/$', views.signup, name='signup'),
     url(r'^lists/$', views.lists, name='lists'),
-    url(r'^create/$', views.create_list, name='new_list'),
+    url(r'^lists/create/$', views.create_list, name='new_list'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

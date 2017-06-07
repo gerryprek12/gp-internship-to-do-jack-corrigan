@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 from app.models import List, Task, Comment
+from app import models
 
 
 class SignUpForm(UserCreationForm):
@@ -19,3 +20,11 @@ class SignUpForm(UserCreationForm):
 class List(forms.ModelForm):
     model = List
     fields = ['name', 'priority', 'created_by', 'assigned_to', 'due_date']
+
+class newList(forms.ModelForm):
+    model = List
+    priortity = forms.ChoiceField(models.PRIORITY_OPTIONS)
+    assign_to = forms.ModelChoiceField(User.objects.all())
+    fields = ['name', 'priority', 'assign_to','due_date']
+
+    class Meta

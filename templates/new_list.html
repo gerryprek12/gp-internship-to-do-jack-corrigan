@@ -1,19 +1,24 @@
+<!--This is pretty gross styling-->
 {% extends 'base.html' %}
 
 {% block content %}
   <h2>Create a new List</h2>
   <form method="post">
     {% csrf_token %}
-    {% for field in form %}
-      <p>
-        {{ field.label_tag }}
-        {{ field }}
-
-        {% for error in field.errors %}
-          <p style="color: red">{{ error }}</p>
-        {% endfor %}
-      </p>
-    {% endfor %}
-    <button type="submit">Save</button>
+      {{ form.name.errors }}
+    <label for="{{ form.name.id_for_label }}">*Name</label>
+    {{ form.name }}
+    <br><small style="color: grey">{{ form.name.help_text }}</small>
+      {{ form.Priority.errors }}
+    <br><br><label for="{{ form.Priority.id_for_label }}">*Priority</label>
+    {{ form.Priority }}
+      {{ form.assigned_to.errors }}
+    <br><br><label for="{{ form.assigned_to.id_for_label }}">Assign To</label>
+    {{ form.assigned_to }}
+      <br><br>{{ form.due_date.errors }}
+    <label for="{{ form.due_date.id_for_label }}">*Due Date</label>
+    {{ form.due_date }}
+    <br><a href="{% url 'lists' %}"class="btn btn-default">Cancel</a>
+    <button type="submit" class="btn btn-default">Save</button>
   </form>
 {% endblock %}

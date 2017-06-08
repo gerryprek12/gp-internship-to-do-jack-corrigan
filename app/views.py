@@ -101,7 +101,7 @@ def create_task(request, id):
             task.list_id = id
             task.save()
 
-            return redirect('lists')
+            return redirect('view', task.list_id)
     else:
         form = newTask()
     return render(request, 'new_task.html', {'form' : form, 'List':list_id})
@@ -109,14 +109,18 @@ def create_task(request, id):
 def mark_task_complete(request, id):
     task_id = get_object_or_404(Task, id=id)
     task_id.completed = True
+    task_id.completed_date = datetime.date.today()
     task_id.save()
-    return redirect('lists')
+    list_id = task_id.list_id
+    return redirect('view', list_id)
 
 def mark_task_incomplete(request, id):
     task_id = get_object_or_404(Task, id=id)
     task_id.completed = False
+    task_id.completed_date = None
     task_id.save()
-    return redirect('lists')
+    list_id = task_id.list_id
+    return redirect('view',list_id)
 
 def EditTask(request, task_id, list_id):
     task_id = get_object_or_404(Task, id=task_id)
@@ -132,7 +136,7 @@ def EditTask(request, task_id, list_id):
             task.list_id = list_id
             task.save()
 
-            return redirect('lists')
+            return redirect('view', list_id)
     else:
         priority_num = task_id.priority
         form = newTask(instance=task_id)
@@ -140,8 +144,9 @@ def EditTask(request, task_id, list_id):
 
 def DeleteTask(request, task_id):
     task_id = get_object_or_404(Task, id=task_id)
+    list_id = task_id.list_id
     task_id.delete()
-    return redirect('lists')
+    return redirect('view',list_id)
 
 
 

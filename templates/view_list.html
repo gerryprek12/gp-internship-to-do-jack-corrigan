@@ -9,13 +9,12 @@
                     <span style="float: right">
 
                     <a href="{% url 'new_task' List.id %}" class="btn btn-sm btn-warning">Add Task</a>
-                    <a href="{% url 'delete' List.id %}" class="btn btn-sm btn-warning">Delete</a>
-                    <a href="{% url 'edit' List.id %}" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="{% url 'delete' List.id %}" class="btn btn-sm btn-warning">Delete List</a>
+                    <a href="{% url 'edit' List.id %}" class="btn btn-sm btn-warning">Edit List</a>
                 </span>
                 </div>
             </div>
             <div class="panel-body">
-                Panel content
                 <div class="row">
                     <div class="col-md-3">
                         <ul class="list-group">
@@ -45,20 +44,20 @@
                         <div class="col-md-6">
                             <div class="panel panel-success">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Complete<span class="badge" style="float: right">{{ num_incomplete }}</span> </h3>
+                                    <h3 class="panel-title">Complete<span class="badge" style="float: right">{{ num_complete }}</span> </h3>
                                 </div>
                                 <div class="panel-body">
                                     {% for task in tasks %}
                                             {% if task.completed == True %}
                                                 <div class="panel panel-default">
                                                     <div class="panel-body">
-                                                        <p style="color: blue"> {{ task.title }}<span class="badge">Priority: {{ abc|element:task.priority }}</span><span style="float: right" class="badge">Due: {{ task.due_date }}</span></p>
+                                                        <p style="color: dodgerblue"> {{ task.title }}<span style="float: right" class="badge">Completed: {{ task.completed_date }}</span></p>
                                                         {% if task.note %}
                                                             <p><small style="color: grey">{{ task.note }}</small></p>
                                                         {% endif %}
                                                         <span style="float: right">
                                                             <a href="#"><button type="button" class="btn btn-info btn-sm btn-flat">View Comments</button></a>
-                                                            <a href="{% url 'mark_task_incomplete' task.id %}"><button type="button" class="btn btn-primary btn-sm btn-flat">Mark Incomplete</button></a>
+                                                            <a href="{% url 'mark_task_incomplete' task.id %}"><button type="button" class="btn btn-warning btn-sm btn-flat">Mark Incomplete</button></a>
 
                                                         </span>
 
@@ -80,7 +79,7 @@
                                             {% if task.completed == False %}
                                                 <div class="panel panel-default">
                                                     <div class="panel-body">
-                                                        <p style="color: blue"> {{ task.title }}<span class="badge">Priority: {{ abc|element:task.priority }}</span><span style="float: right" class="badge">Due: {{ task.due_date }}</span></p>
+                                                        <p style="color: dodgerblue"> {{ task.title }}<span class="badge">Priority: {{ abc|element:task.priority }}</span><span style="float: right" class="badge">Due: {{ task.due_date }}</span></p>
                                                         {% if task.note %}
                                                             <p><small style="color: grey">{{ task.note }}</small></p>
                                                         {% endif %}

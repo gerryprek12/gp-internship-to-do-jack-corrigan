@@ -67,6 +67,11 @@ def EditList(request, id):
         form = newList(instance=list_id)
     return render(request, 'edit_list.html', {'form':form, 'priority_num':priority_num})
 
+def DeleteList(request, id):
+    list_id = get_object_or_404(List, id=id)
+    list_id.delete()
+    return redirect('lists')
+
 
 
 def index(request):

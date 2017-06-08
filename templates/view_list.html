@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load abc %}
+{% block content %}
+    <div class="container">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="panel-title" class="row" >
+                    <div class="col-md-8">{{ form.name.value }}</div>
+                    <div class="col-md-2">Add Task</div>
+                    <div class="col-md-1"><a href="{% url 'delete' List.id %}" class="btn btn-sm btn-warning">Delete</a></div>
+                    <div class="col-md-1"><a href="{% url 'edit' List.id %}" class="btn btn-sm btn-warning">Edit</a></div>
+                </div>
+            </div>
+            <div class="panel-body">
+                Panel content
+                <div class="row">
+                    <div class="col-md-3">
+                        <ul class="list-group">
+                            <li class="list-group-item list-group-item-success">Due Date:</li>
+                            <li class="list-group-item list-group-item-warning">Priority</li>
+                            <li class="list-group-item list-group-item">Assigned To:</li>
+                            <li class="list-group-item list-group-item">Created By</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="list-group">
+                            <li class="list-group-item list-group-item-success">{{ form.due_date.value }}</li>
+                            <li class="list-group-item list-group-item-warning">{{ abc|element:List.priority }}</li>
+                            <li class="list-group-item list-group-item">{{ List.assigned_to }}</li>
+                            <li class="list-group-item list-group-item">{{ List.created_by }}</li>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Tasks:</h3>
+                </div>
+                <div class="panel-body">
+                    Panel content
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="panel panel-success">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Panel title</h3>
+                                </div>
+                                <div class="panel-body">
+                                    Panel content
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="panel panel-danger">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Panel title</h3>
+                                </div>
+                                <div class="panel-body">
+                                    Panel content
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

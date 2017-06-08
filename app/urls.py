@@ -30,6 +30,7 @@ urlpatterns = [
     url(r'^lists/create/$', views.create_list, name='new_list'),
     url(r'^lists/edit/(\d+)/$', views.EditList, name='edit'),
     url(r'^lists/delete/(\d+)/$', views.DeleteList, name='delete'),
+    url(r'^lists/view/(\d+)/$', views.ViewList, name='view'),
 
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

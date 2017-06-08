@@ -72,6 +72,12 @@ def DeleteList(request, id):
     list_id.delete()
     return redirect('lists')
 
+def ViewList(request,id):
+    list_id = get_object_or_404(List, id=id)
+    priority_num = list_id.priority
+    form = newList(instance=list_id)
+    return render(request, 'view_list.html', {'form':form, 'priority_num':priority_num, 'List':list_id, 'abc':models.PRIORITY_OPTIONS})
+
 
 
 def index(request):

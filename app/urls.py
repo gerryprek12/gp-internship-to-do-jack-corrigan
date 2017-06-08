@@ -31,6 +31,10 @@ urlpatterns = [
     url(r'^lists/edit/(\d+)/$', views.EditList, name='edit'),
     url(r'^lists/delete/(\d+)/$', views.DeleteList, name='delete'),
     url(r'^lists/view/(\d+)/$', views.ViewList, name='view'),
+    url(r'^lists/(\d+)/create_task/$', views.create_task, name='new_task'),
+    url(r'^task/mark_complete/(\d+)/$', views.mark_task_complete, name='mark_task_complete'),
+    url(r'^lists/(\d+)/task/edit/(\d+)/$', views.EditTask, name='edit_task'),
+
 
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

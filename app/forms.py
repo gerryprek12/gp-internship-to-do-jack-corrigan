@@ -21,4 +21,10 @@ class newList(forms.ModelForm):
 
     class Meta:
         model = List
-        fields = ('name', 'assigned_to', 'due_date')
+        fields = ('name', 'assigned_to', 'due_date',)
+
+
+class newTask(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = ('title', 'assigned_to', 'due_date', 'note',)

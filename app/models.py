@@ -32,10 +32,10 @@ class List(models.Model):
 class Task(models.Model):
     title = models.CharField(max_length=100)
     list = models.ForeignKey(List, on_delete=models.CASCADE)
-    created_date = models.DateField
-    due_date = models.DateField
-    completed = models.BooleanField
-    completed_date = models.DateField
+    created_date = models.DateField()
+    due_date = models.DateField()
+    completed = models.BooleanField(default=False)
+    completed_date = models.DateField(null=True)
     created_by = models.ForeignKey(User, related_name='task_created_by_user')
     assigned_to = models.ForeignKey(User, related_name='task_assigned_to_user')
     note = models.TextField(null=True)

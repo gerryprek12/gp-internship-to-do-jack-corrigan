@@ -17,13 +17,7 @@ class SignUpForm(UserCreationForm):
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
 
 
-#class List(forms.ModelForm):
- #   model = List
-  #  fields = ['name', 'priority', 'created_by', 'assigned_to', 'due_date']
-
 class newList(forms.ModelForm):
-    Priority = forms.ChoiceField(choices=models.PRIORITY_OPTIONS2)
-
 
     class Meta:
         model = List

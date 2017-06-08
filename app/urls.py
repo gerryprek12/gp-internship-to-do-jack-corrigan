@@ -33,7 +33,9 @@ urlpatterns = [
     url(r'^lists/view/(\d+)/$', views.ViewList, name='view'),
     url(r'^lists/(\d+)/create_task/$', views.create_task, name='new_task'),
     url(r'^task/mark_complete/(\d+)/$', views.mark_task_complete, name='mark_task_complete'),
+    url(r'^task/mark_incomplete/(\d+)/$', views.mark_task_incomplete, name='mark_task_incomplete'),
     url(r'^lists/(\d+)/task/edit/(\d+)/$', views.EditTask, name='edit_task'),
+    url(r'^task/delete/(\d+)/$', views.DeleteTask, name='delete_task'),
 
 
 

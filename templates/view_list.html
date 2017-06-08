@@ -4,11 +4,14 @@
     <div class="container">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <div class="panel-title" class="row" >
-                    <div class="col-md-8">{{ form.name.value }}</div>
-                    <div class="col-md-2"><a href="{% url 'new_task' List.id %}" class="btn btn-sm btn-warning">Add Task</a></div>
-                    <div class="col-md-1"><a href="{% url 'delete' List.id %}" class="btn btn-sm btn-warning">Delete</a></div>
-                    <div class="col-md-1"><a href="{% url 'edit' List.id %}" class="btn btn-sm btn-warning">Edit</a></div>
+                <div class="panel-title">
+                    {{ form.name.value }}
+                    <span style="float: right">
+
+                    <a href="{% url 'new_task' List.id %}" class="btn btn-sm btn-warning">Add Task</a>
+                    <a href="{% url 'delete' List.id %}" class="btn btn-sm btn-warning">Delete</a>
+                    <a href="{% url 'edit' List.id %}" class="btn btn-sm btn-warning">Edit</a>
+                </span>
                 </div>
             </div>
             <div class="panel-body">
@@ -38,35 +41,38 @@
                     <h3 class="panel-title">Tasks:</h3>
                 </div>
                 <div class="panel-body">
-                    Panel content
                     <div class="row">
                         <div class="col-md-6">
                             <div class="panel panel-success">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Panel title</h3>
+                                    <h3 class="panel-title">Complete<span class="badge" style="float: right">{{ num_incomplete }}</span> </h3>
                                 </div>
                                 <div class="panel-body">
                                     {% for task in tasks %}
-                                        {% if task.completed == True %}
-                                            <div class="panel panel-default">
-                                                <div class="panel-body">
-                                                    <div class="container">
-                                                        <div class="row">
-                                                            {{ task.title }}<span class="badge">yoo</span>
+                                            {% if task.completed == True %}
+                                                <div class="panel panel-default">
+                                                    <div class="panel-body">
+                                                        <p style="color: blue"> {{ task.title }}<span class="badge">Priority: {{ abc|element:task.priority }}</span><span style="float: right" class="badge">Due: {{ task.due_date }}</span></p>
+                                                        {% if task.note %}
+                                                            <p><small style="color: grey">{{ task.note }}</small></p>
+                                                        {% endif %}
+                                                        <span style="float: right">
+                                                            <a href="#"><button type="button" class="btn btn-info btn-sm btn-flat">View Comments</button></a>
+                                                            <a href="{% url 'mark_task_incomplete' task.id %}"><button type="button" class="btn btn-primary btn-sm btn-flat">Mark Incomplete</button></a>
 
-                                                        </div>
+                                                        </span>
+
                                                     </div>
                                                 </div>
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
+                                            {% endif %}
+                                        {% endfor %}
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="panel panel-danger">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Panel title<span class="badge" style="float: right">{{ num_incomplete }}</span> </h3>
+                                    <h3 class="panel-title">Incomplete<span class="badge" style="float: right">{{ num_incomplete }}</span> </h3>
                                 </div>
                                 <div class="panel-body">
                                     <div class="panel-body">
@@ -81,7 +87,7 @@
                                                         <span style="float: right">
                                                             <a href="#"><button type="button" class="btn btn-info btn-sm btn-flat">View Comments</button></a>
                                                             <a href="{% url 'mark_task_complete' task.id %}"><button type="button" class="btn btn-primary btn-sm btn-flat">Mark Complete</button></a>
-                                                            <a href="#"><button type="button" class="btn btn-danger btn-sm btn-flat">Delete Task</button></a>
+                                                            <a href="{% url 'delete_task' task.id %}"><button type="button" class="btn btn-danger btn-sm btn-flat">Delete Task</button></a>
                                                             <a href= "{% url 'edit_task' task.id List.id %}"><button type="button" class="btn btn-success btn-sm btn-flat">Edit Task</button></a>
 
                                                         </span>

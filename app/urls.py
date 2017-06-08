@@ -28,4 +28,7 @@ urlpatterns = [
     url(r'^signup/$', views.signup, name='signup'),
     url(r'^lists/$', views.lists, name='lists'),
     url(r'^lists/create/$', views.create_list, name='new_list'),
+    url(r'^lists/edit/(\d+)/$', views.EditList, name='edit'),
+
+
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

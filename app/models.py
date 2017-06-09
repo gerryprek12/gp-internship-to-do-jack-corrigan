@@ -38,7 +38,7 @@ class Task(models.Model):
     completed_date = models.DateField(null=True)
     created_by = models.ForeignKey(User, related_name='task_created_by_user')
     assigned_to = models.ForeignKey(User, related_name='task_assigned_to_user')
-    note = models.TextField(null=True)
+    note = models.TextField(null=True, blank=True)
     priority = models.IntegerField()
 
     class Meta:
@@ -47,8 +47,8 @@ class Task(models.Model):
 class Comment(models.Model):
     author = models.ForeignKey(User)
     task = models.ForeignKey(Task)
-    date = models.DateField
-    body = models.TextField
+    date = models.DateTimeField()
+    body = models.TextField()
 
     class Meta:
         db_table="Comment"

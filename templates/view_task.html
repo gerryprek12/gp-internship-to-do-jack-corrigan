@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load abc %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="{% url 'view' List.id  %}" class="btn-sm btn-success"><- Back to List</a>
+                </div>
+            </div>
+        <br>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        Task:  {{ task.title }}
+                        <span style="float: right">
+                    <a href="{% url 'delete_task' task.id %}" class="btn btn-sm btn-danger">Delete Task</a>
+                    <a href="{% url 'edit_task' List.id task.id %}" class="btn btn-sm btn-success">Edit Task</a>
+                </span>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <ul class="list-group">
+                                <li class="list-group-item">List:</li>
+                                <li class="list-group-item list-group-item-success">Due Date:</li>
+                                <li class="list-group-item list-group-item-warning">Priority</li>
+                                <li class="list-group-item list-group-item">Assigned To:</li>
+                                <li class="list-group-item list-group-item">Created By</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="list-group">
+                                <li class="list-group-item">{{ List.name }}</li>
+                                <li class="list-group-item list-group-item-success">{{ task.due_date }}</li>
+                                <li class="list-group-item list-group-item-warning">{{ abc|element:task.priority }}</li>
+                                <li class="list-group-item list-group-item">{{ task.assigned_to }}</li>
+                                <li class="list-group-item list-group-item">{{ task.created_by }}</li>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <div class="panel-title">Comments:<span style="float: right"><a href="{%  url 'create_comment' List.id task.id %}" class="btn-sm btn-success">Add Comment</a> </span></div>
+                    </div>
+                    <div class="panel-body">
+                        {% for comment in comments %}
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">{{ comment.author }} commented on {{ comment.date }}</h3>
+                                </div>
+                                <div class="panel-body">
+                                    {{ comment.body }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

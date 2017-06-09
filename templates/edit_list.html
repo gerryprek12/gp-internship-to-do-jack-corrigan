@@ -1,7 +1,9 @@
 <!--This is pretty gross styling-->
 {% extends 'base.html' %}
+
 {% load abc %}
 {% block content %}
+    {% if user.is_authenticated %}
   <h2>Edit List: {{ form.name.value }}</h2>
   <form method="post">
     {% csrf_token %}
@@ -29,4 +31,5 @@
     <script>
     document.getElementById("id_Priority").value = {{ priority_num }};
     </script>
+    {% endif %}
 {% endblock %}

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load abc %}
 {% block content %}
+    {% if user.is_authenticated %}
     <div class="container">
         <h1>My Lists</h1>
         <a href="{% url 'new_list' %}"class="btn btn-default">Create a new List</a>
@@ -41,4 +42,5 @@
             </div>
         </div>
     </div>
+    {% endif %}
 {% endblock %}

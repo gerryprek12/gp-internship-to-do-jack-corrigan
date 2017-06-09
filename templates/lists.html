@@ -36,9 +36,11 @@
                                     <td>{{ List.assigned_to }}</td>
                                     <td>{{ b|element:List.id }}</td>
                                     <td>{{ a|element:List.id }}</td>
-                                    <td><a href="{% url 'view' List.id %}" class="btn btn-sm btn-primary">View</a></td>
-                                    <td><a href="{% url 'edit' List.id %}" class="btn btn-sm btn-success">Edit</a></td>
-                                    <td><a href="{% url 'delete' List.id %}" class="btn btn-sm btn-danger">Delete</a></td>
+                                    <td>
+                                        <a href="{% url 'view' List.id %}" class="btn btn-sm btn-primary">View</a>
+                                        <a href="{% url 'edit' List.id %}" class="btn btn-sm btn-success">Edit</a>
+                                        <a href="{% url 'delete' List.id %}" class="btn btn-sm btn-danger">Delete</a>
+                                    </td>
                                 </tr>
                             {% endfor %}
                             </tbody>

@@ -1,12 +1,14 @@
+"""
+This file contains all the logic for the application
+You will find CRUD functions for all models as well as authentication logic
+"""
+
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
-from django.views.generic.edit import UpdateView
 from django.shortcuts import get_object_or_404
 import datetime
 
 from app.forms import *
-# from app.forms import List as ListForm
 from app.models import List
 from app import models
 

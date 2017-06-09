@@ -1,3 +1,9 @@
+"""
+This file contains the models for List, Task, and Comment.
+It also defines the constants for Priority
+"""
+
+
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -5,21 +11,15 @@ PRIORITY_OPTION_LOW = 3
 PRIORITY_OPTION_MEDIUM = 2
 PRIORITY_OPTION_HIGH = 1
 
+# changed the tuple of PRIORITY_OPTIONS to a dictionary
 PRIORITY_OPTIONS = {
     PRIORITY_OPTION_LOW: 'Low',
     PRIORITY_OPTION_MEDIUM: 'Medium',
     PRIORITY_OPTION_HIGH: 'High'
 }
 
-PRIORITY_OPTIONS2 = (
-    (PRIORITY_OPTION_LOW, 'Low'),
-    (PRIORITY_OPTION_MEDIUM, 'Medium'),
-    (PRIORITY_OPTION_HIGH, 'High')
-)
-
 
 class List(models.Model):
-    # add verbose names
     name = models.CharField(max_length=100, verbose_name='*Name', help_text='Enter the name of the list.')
     priority = models.IntegerField(verbose_name='*Priority')
     created_by = models.ForeignKey(User, related_name='list_created_by_user')

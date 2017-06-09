@@ -1,10 +1,18 @@
+"""
+This file contains the forms for Signup, List, Task, and Comment
+
+The form names (i.e. 'newList') are a bit misleading, as these forms are also used to edit model objects as well
+
+Priority is left out of fields for List and Task because it was tricky, and needed to be handled
+ in a custom manner on the HTML pages using a helper function found in templatetags
+"""
+
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import Textarea
 
 from app.models import List, Task, Comment
-from app import models
 
 
 class SignUpForm(UserCreationForm):

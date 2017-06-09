@@ -1,0 +1,16 @@
+<!--This is pretty gross styling-->
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+  <h2>Add comment to: {{ task.title }}</h2>
+  <form method="post">
+    {% csrf_token %}
+    <label for="{{ form.body.id_for_body }}">Body</label>
+    {{ form.body }}
+
+    <br><a href="{% url 'view_task' task.list_id task.id %}"class="btn btn-default">Cancel</a>
+    <button type="submit" class="btn btn-default">Save</button>
+  </form>
+    {% endif %}
+{% endblock %}

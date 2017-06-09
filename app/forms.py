@@ -28,3 +28,8 @@ class newTask(forms.ModelForm):
     class Meta:
         model = Task
         fields = ('title', 'assigned_to', 'due_date', 'note',)
+
+class newComment(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('body',)

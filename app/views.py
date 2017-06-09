@@ -78,9 +78,9 @@ def ViewList(request,id):
     priority_num = list_id.priority
     form = newList(instance=list_id)
     tasks = Task.objects.filter(list_id=id)
-    incomplete = Task.objects.filter(completed=False)
+    incomplete = tasks.filter(completed=False)
     num_incomplete = len(incomplete)
-    complete = Task.objects.filter(completed=True)
+    complete = tasks.filter(completed=True)
     num_complete = len(complete)
 
     return render(request, 'view_list.html', {'form':form, 'priority_num':priority_num, 'List':list_id,
@@ -147,6 +147,32 @@ def DeleteTask(request, task_id):
     list_id = task_id.list_id
     task_id.delete()
     return redirect('view',list_id)
+
+def ViewTask(request,list_id,task_id):
+    list = get_object_or_404(List, id=list_id)
+    priority_num = list.priority
+    task = get_object_or_404(Task, id=task_id)
+    form = newTask(instance=task)
+    comments = Comment.objects.filter(task = task_id)
+
+    return render(request, 'view_task.html', {'form':form, 'priority_num':priority_num, 'List':list,
+                                              'abc':models.PRIORITY_OPTIONS, 'task':task, 'comments':comments})
+
+def create_comment(request, list_id, task_id):
+    task = get_object_or_404(Task, id=task_id)
+    if request.method == 'POST':
+        form = newComment(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.author = request.user
+            comment.date = datetime.datetime.today()
+            comment.task = task
+            comment.save()
+
+            return redirect('view_task', list_id, task_id)
+    else:
+        form = newComment()
+    return render(request, 'new_comment.html', {'form' : form, 'task':task})
 
 
 

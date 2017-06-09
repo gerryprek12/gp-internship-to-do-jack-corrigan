@@ -179,8 +179,8 @@ def ViewTask(request,list_id,task_id):
     else:
 
         return render(request, 'view_task.html', {'form':form, 'priority_num':priority_num, 'List':list,
-                                              'abc':models.PRIORITY_OPTIONS, 'task':task, 'comments':comments,
-                                              'form1':form1})
+                                                  'abc':models.PRIORITY_OPTIONS, 'task':task, 'comments':comments,
+                                                  'form1':form1})
 
 def create_comment(request, list_id, task_id):
     task = get_object_or_404(Task, id=task_id)
@@ -197,6 +197,26 @@ def create_comment(request, list_id, task_id):
     else:
         form = newComment()
     return render(request, 'new_comment.html', {'form' : form, 'task':task})
+
+def editComment(request, list_id, task_id, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id)
+    task = get_object_or_404(Task, id=task_id)
+    if request.method == 'POST':
+        form = newComment(request.POST, instance=comment)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.date = datetime.datetime.today()
+            comment.save()
+
+            return redirect('view_task', list_id, task_id)
+    else:
+        form = newComment(instance=comment)
+    return render(request, 'edit_comment.html', {'form': form, 'task': task, 'comment':comment})
+
+def DeleteComment(request, list_id, task_id, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id)
+    comment.delete()
+    return redirect('view_task', list_id ,task_id)
 
 
 

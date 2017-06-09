@@ -33,9 +33,20 @@ def logout_user(request):
 
 def lists(request):
     Lists = List.objects.all()
+    a = {}
+    b = {}
+    for element in Lists:
+        tasks = Task.objects.filter(list_id=element.pk)
+        incomplete = tasks.filter(completed=False)
+        num_incomplete = len(incomplete)
+        a[element.pk] = num_incomplete
+        complete = tasks.filter(completed=True)
+        num_complete = len(complete)
+        b[element.pk] = num_complete
 
 
-    return render(request, 'lists.html', {'Lists':Lists,'abc':models.PRIORITY_OPTIONS})
+    return render(request, 'lists.html', {'Lists':Lists,'abc':models.PRIORITY_OPTIONS,
+                                          'a': a, 'b': b})
 
 
 def create_list(request):
@@ -153,10 +164,23 @@ def ViewTask(request,list_id,task_id):
     priority_num = list.priority
     task = get_object_or_404(Task, id=task_id)
     form = newTask(instance=task)
+    form1 = newComment()
     comments = Comment.objects.filter(task = task_id)
+    if request.method == 'POST':
+        form = newComment(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.author = request.user
+            comment.date = datetime.datetime.today()
+            comment.task = task
+            comment.save()
 
-    return render(request, 'view_task.html', {'form':form, 'priority_num':priority_num, 'List':list,
-                                              'abc':models.PRIORITY_OPTIONS, 'task':task, 'comments':comments})
+            return redirect('view_task', list_id, task_id)
+    else:
+
+        return render(request, 'view_task.html', {'form':form, 'priority_num':priority_num, 'List':list,
+                                              'abc':models.PRIORITY_OPTIONS, 'task':task, 'comments':comments,
+                                              'form1':form1})
 
 def create_comment(request, list_id, task_id):
     task = get_object_or_404(Task, id=task_id)

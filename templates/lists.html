@@ -3,8 +3,9 @@
 {% block content %}
     {% if user.is_authenticated %}
     <div class="container">
-        <h1>My Lists</h1>
-        <a href="{% url 'new_list' %}"class="btn btn-default">Create a new List</a>
+        <h1>My Lists</h1><span style="float: right">
+        <a href="{% url 'new_list' %}"class="btn btn-success">Create a new List</a>
+    </span>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -23,17 +24,21 @@
                         </thead>
                         <tbody>
                             {% for List in Lists %}
-                                <tr>
-                                    <td><a href="{% url 'lists' %}">{{ List.name }}</a></td>
+                                <tr
+                                        {% if List.priority == 1 %} class="list-group-item-danger"
+                                        {% elif List.priority == 2 %} class="list-group-item-warning"
+                                        {% elif List.priority == 3 %} class="list-group-item-success" {% endif %}
+                                >
+                                    <td><a href="{% url 'view' List.id %}">{{ List.name }}</a></td>
                                     <td>{{ abc|element:List.priority }}</td>
                                     <td>{{ List.due_date }}</td>
                                     <td>{{ List.created_by }}</td>
                                     <td>{{ List.assigned_to }}</td>
-                                    <td>Placeholder</td>
-                                    <td>Placeholder</td>
-                                    <td><a href="{% url 'view' List.id %}" class="btn btn-sm btn-warning">View</a></td>
-                                    <td><a href="{% url 'edit' List.id %}" class="btn btn-sm btn-warning">Edit</a></td>
-                                    <td><a href="{% url 'delete' List.id %}" class="btn btn-sm btn-warning">Delete</a></td>
+                                    <td>{{ b|element:List.id }}</td>
+                                    <td>{{ a|element:List.id }}</td>
+                                    <td><a href="{% url 'view' List.id %}" class="btn btn-sm btn-primary">View</a></td>
+                                    <td><a href="{% url 'edit' List.id %}" class="btn btn-sm btn-success">Edit</a></td>
+                                    <td><a href="{% url 'delete' List.id %}" class="btn btn-sm btn-danger">Delete</a></td>
                                 </tr>
                             {% endfor %}
                         </tbody>

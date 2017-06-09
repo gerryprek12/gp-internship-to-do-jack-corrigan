@@ -25,9 +25,9 @@
                             <ul class="list-group">
                                 <li class="list-group-item">List:</li>
                                 <li class="list-group-item list-group-item-success">Due Date:</li>
-                                <li class="list-group-item list-group-item-warning">Priority</li>
+                                <li class="list-group-item list-group-item-warning">Priority:</li>
                                 <li class="list-group-item list-group-item">Assigned To:</li>
-                                <li class="list-group-item list-group-item">Created By</li>
+                                <li class="list-group-item list-group-item">Created By:</li>
                             </ul>
                         </div>
                         <div class="col-md-9">
@@ -53,7 +53,12 @@
                         {% for comment in comments %}
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">{{ comment.author }} commented on {{ comment.date }}</h3>
+                                    <div class="panel-title">{{ comment.author }} commented on {{ comment.date }}
+                                        <span style="float: right">
+                                        <a href="{% url 'edit_comment' List.id task.id comment.id %}" class="btn btn-sm btn-primary">Edit Comment</a>
+                                        <a href="{% url 'delete_comment' List.id task.id comment.id %}" class="btn btn-sm btn-danger">Delete Comment</a>
+                                    </span>
+                                    </div>
                                 </div>
                                 <div class="panel-body">
                                     {{ comment.body }}

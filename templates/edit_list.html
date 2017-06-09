@@ -1,35 +1,34 @@
-<!--This is pretty gross styling-->
 {% extends 'base.html' %}
 
 {% load abc %}
 {% block content %}
     {% if user.is_authenticated %}
-  <h2>Edit List: {{ form.name.value }}</h2>
-  <form method="post">
-    {% csrf_token %}
-      {{ form.name.errors }}
-    <label for="{{ form.name.id_for_label }}">*Name</label>
-    {{ form.name }}
-    <br><small style="color: grey">{{ form.name.help_text }}</small>
-      {{ form.Priority.errors }}
-    <br><br><label for="{{ form.priority.id_for_label }}">*Priority</label>
-    <select name="Priority" id="id_Priority">
-      <option value="1">HIGH</option>
-      <option value="2">MEDIUM</option>
-      <option value="3">LOW</option>
+        <h2>Edit List: {{ form.name.value }}</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.name.errors }}
+            <label for="{{ form.name.id_for_label }}">*Name</label>
+            {{ form.name }}
+            <br><small style="color: grey">{{ form.name.help_text }}</small>
+            {{ form.Priority.errors }}
+            <br><br><label for="{{ form.priority.id_for_label }}">*Priority</label>
+            <select name="Priority" id="id_Priority">
+                <option value="1">HIGH</option>
+                <option value="2">MEDIUM</option>
+                <option value="3">LOW</option>
 
-      </select>
-      {{ form.assigned_to.errors }}
-    <br><br><label for="{{ form.assigned_to.id_for_label }}">Assign To</label>
-    {{ form.assigned_to }}
-      <br><br>{{ form.due_date.errors }}
-    <label for="{{ form.due_date.id_for_label }}">*Due Date</label>
-    {{ form.due_date }}
-    <br><a href="{% url 'lists' %}"class="btn btn-default">Cancel</a>
-    <button type="submit" class="btn btn-default">Save</button>
-  </form>
-    <script>
-    document.getElementById("id_Priority").value = {{ priority_num }};
-    </script>
+            </select>
+            {{ form.assigned_to.errors }}
+            <br><br><label for="{{ form.assigned_to.id_for_label }}">Assign To</label>
+            {{ form.assigned_to }}
+            <br><br>{{ form.due_date.errors }}
+            <label for="{{ form.due_date.id_for_label }}">*Due Date</label>
+            {{ form.due_date }}
+            <br><a href="{% url 'lists' %}"class="btn btn-danger">Cancel</a>
+            <button type="submit" class="btn btn-success">Save</button>
+        </form>
+        <script>
+            document.getElementById("id_Priority").value = {{ priority_num }};
+        </script>
     {% endif %}
 {% endblock %}

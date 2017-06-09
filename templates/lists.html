@@ -2,15 +2,15 @@
 {% load abc %}
 {% block content %}
     {% if user.is_authenticated %}
-    <div class="container">
-        <h1>My Lists</h1><span style="float: right">
+        <div class="container">
+            <h1>My Lists</h1><span style="float: right">
         <a href="{% url 'new_list' %}"class="btn btn-success">Create a new List</a>
     </span>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <table class="table">
-                        <thead>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table">
+                            <thead>
                             <tr>
                                 <th>Name</th>
                                 <th>Priority</th>
@@ -21,8 +21,8 @@
                                 <th># of Incomplete Tasks</th>
                                 <th>Actions</th>
                             </tr>
-                        </thead>
-                        <tbody>
+                            </thead>
+                            <tbody>
                             {% for List in Lists %}
                                 <tr
                                         {% if List.priority == 1 %} class="list-group-item-danger"
@@ -41,11 +41,11 @@
                                     <td><a href="{% url 'delete' List.id %}" class="btn btn-sm btn-danger">Delete</a></td>
                                 </tr>
                             {% endfor %}
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     {% endif %}
 {% endblock %}
